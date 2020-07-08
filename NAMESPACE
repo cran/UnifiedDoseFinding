@@ -1,0 +1,25 @@
+importFrom("stats", "offset", "pbeta", "pbinom", "qbeta", "rmultinom",
+           "rnorm", "runif", "integrate", "rbinom", "sd")
+
+export(get_oc_gBOIN_Continuous)
+export(get_oc_QuasiBOIN)
+export(get_oc_gBOIN_TB)
+
+export(next_mtd_gBOIN_Continuous)
+export(next_mtd_gBOIN_TB)
+export(next_mtd_QuasiBOIN)
+
+export(select_mtd_gBOIN_Continuous)
+export(select_mtd_gBOIN_TB)
+export(select_mtd_QuasiBOIN)
+export(get_oc_Quasi_CRM)
+export(next_mtd_Quasi_CRM)
+export(select_mtd_Quasi_CRM)
+
+export(get_oc_Ivanova_binary)
+export(next_Ivanova_binary)
+export(select_Ivanova_binary)
+
+export(get_oc_Ivanova_continuous)
+export(next_Ivanova_continuous)
+export(select_Ivanova_continuous)
