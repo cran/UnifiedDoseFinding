@@ -9,7 +9,8 @@ Obtain the operating characteristics of the dose-finding design of binary endpoi
 }
 \usage{
 get_oc_Ivanova_binary(target, eps = 1, truetox, ncohort, cohortsize,
-                      ntrial, startdose = 1, seed = 100)
+                      n.earlystop = 100, ntrial, startdose = 1,
+                      seed = 100)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,6 +29,9 @@ the number of cohorts
 }
   \item{cohortsize}{
 the cohort size
+}
+  \item{n.earlystop}{
+the early stopping parameter. The default value is n.earlystop = 100
 }
   \item{ntrial}{
 the number of trials
@@ -53,8 +57,8 @@ Chia-Wei Hsu, Haitao Pan, Rongji Mu
 \examples{
 target <- 0.3
 truetox <- c(0.30, 0.45, 0.50, 0.55, 0.60, 0.65)
-ncohort <- 25
-cohortsize <- 1
+ncohort <- 10
+cohortsize <- 3
 ntrial <- 4000
 get_oc_Ivanova_binary(target = target, truetox = truetox, ncohort = ncohort,
                       cohortsize = cohortsize, ntrial = ntrial)

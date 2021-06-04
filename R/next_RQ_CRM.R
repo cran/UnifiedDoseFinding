@@ -1,4 +1,4 @@
-next_mtd_Quasi_CRM <- function(target, n, y, dose.curr, score, skeleton, cutoff.eli = 0.90, mselection = 1){
+next_RQ_CRM <- function(target, n, y, dose.curr, score, skeleton, cutoff.eli = 0.90, mselection = 1){
   # if a single skeleton is inputed as a vector, convert it to a matrix
   if(is.vector(skeletons)) skeletons=t(as.matrix(skeletons));
 
@@ -25,7 +25,7 @@ next_mtd_Quasi_CRM <- function(target, n, y, dose.curr, score, skeleton, cutoff.
 
 
   s.max = max(score);
-  target = target/s.max;  # standardize target ET score
+  target1 = target/s.max;  # standardize target ET score
   ndose = ncol(skeletons);
   ptox.hat = numeric(ndose); # estimate of toxicity prob
 
@@ -44,7 +44,7 @@ next_mtd_Quasi_CRM <- function(target, n, y, dose.curr, score, skeleton, cutoff.
     else msel = 1;
 
     # estimation based on the selected model
-    p.overtox = integrate(posterior,lower=-Inf,upper=log(log(target)/log(skeletons[msel,1])), skeletons[msel,], y, n)$value/marginal[msel];
+    p.overtox = integrate(posterior,lower=-Inf,upper=log(log(target1)/log(skeletons[msel,1])), skeletons[msel,], y, n)$value/marginal[msel];
     if(p.overtox>cutoff.eli) { stop=1; return(99);}
 
     # calculate posterior mean of toxicity probability at each dose leavel
@@ -55,7 +55,7 @@ next_mtd_Quasi_CRM <- function(target, n, y, dose.curr, score, skeleton, cutoff.
     pj.overtox = rep(0, nskel);
     for(k in 1:nskel)
     {
-      pj.overtox[k] = integrate(posterior,lower=-Inf,upper=log(log(target)/log(skeletons[k,1])), skeletons[k,], y, n)$value/marginal[k];
+      pj.overtox[k] = integrate(posterior,lower=-Inf,upper=log(log(target1)/log(skeletons[k,1])), skeletons[k,], y, n)$value/marginal[k];
     }
     p.overtox = sum(postprob*pj.overtox);
     if(p.overtox>cutoff.eli) { stop=1; return(99);}
@@ -70,7 +70,7 @@ next_mtd_Quasi_CRM <- function(target, n, y, dose.curr, score, skeleton, cutoff.
     }
   }
 
-  diff = abs(ptox.hat-target);
+  diff = abs(ptox.hat-target1);
   dose.best = min(which(diff==min(diff)));
   #       dose.curr = dose.best;  # allowing dose skipping
   if(dose.best>dose.curr && dose.curr != ndose) dose.curr = dose.curr+1;

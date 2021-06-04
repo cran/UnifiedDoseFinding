@@ -1,4 +1,4 @@
-nonpart_binary=function(ga,truetox,ncohort,cohortsize,startdose=1, eps){
+nonpart_binary=function(ga,truetox,ncohort,cohortsize,startdose=1, eps, n.earlystop1){
   # input data
   # model=xy[1]	# dose-response scenario
   n=ncohort*cohortsize		# total sample size
@@ -37,6 +37,8 @@ nonpart_binary=function(ga,truetox,ncohort,cohortsize,startdose=1, eps){
   count=sum(trials)
   while (count<n)	{groupsize=min(n-count,grsize)
   trials[dosenum]=trials[dosenum]+groupsize
+  if (trials[dosenum] >= n.earlystop1)
+    break
   resp=rbinom(1,groupsize,truetox[dosenum])
   y[dosenum]=y[dosenum]+resp
   qhat=y[dosenum]/trials[dosenum]

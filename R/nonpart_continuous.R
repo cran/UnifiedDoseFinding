@@ -1,4 +1,4 @@
-nonpart_continuous=function(ga,truetox,ncohort,cohortsize,startdose=1, eps)
+nonpart_continuous=function(ga,truetox,ncohort,cohortsize,startdose=1, eps, n.earlystop1)
 {
   # input data
   # model=xy[1]	# dose-response scenario
@@ -43,6 +43,8 @@ nonpart_continuous=function(ga,truetox,ncohort,cohortsize,startdose=1, eps)
   while (count<n)	{
     groupsize=min(n-count,grsize)
     trials[dosenum]=trials[dosenum]+groupsize
+    if (trials[dosenum] >= n.earlystop1)
+      break
     #resp=rbinom(1,groupsize,truetox[dosenum])
     resp = rnorm(cohortsize,c_true[dosenum],c_true[dosenum])#c_true[dosenum])#0.1*dosenum)
     c_resp[[dosenum]] = c(c_resp[[dosenum]],resp)

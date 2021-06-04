@@ -1,5 +1,5 @@
-\name{get_oc_Quasi_CRM}
-\alias{get_oc_Quasi_CRM}
+\name{get_oc_RQ_CRM}
+\alias{get_oc_RQ_CRM}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Generate operating characteristics for finding the maximum tolerated dose (MTD) defined by Equivalent Score (ET) using Quasi-CRM design
@@ -8,9 +8,10 @@ Generate operating characteristics for finding the maximum tolerated dose (MTD) 
 Obtain the operating characteristics of Quasi-CRM design (Yuan et al. 2007) and Robust-Quasi-CRM design (Pan et al. 2014) for finding the maximum tolerated dose (MTD) using Equivalent Score (ET) derived from toxicity grade information
 }
 \usage{
-get_oc_Quasi_CRM(ptox, skeletons, target, score, cohortsize, ncohort,
-                 start.dose = 1, mselection = 1, cutoff.eli = 0.90,
-                 ntrial = 10, seed = 100)
+get_oc_RQ_CRM(ptox, skeletons, target, score, cohortsize,
+              ncohort, n.earlystop = 100, start.dose = 1,
+              mselection = 1, cutoff.eli = 0.90, ntrial = 10,
+              seed = 100)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -32,6 +33,9 @@ the cohort size
   \item{ncohort}{
 the number of cohort
   }
+  \item{n.earlystop}{
+the early stopping parameter. The default value is n.earlystop = 100
+  }
   \item{start.dose}{
 the starting dose level. The default value is start.dose = 1
   }
@@ -50,7 +54,7 @@ the seed. The default value is seed = 100
 }
 
 \value{
-\code{get_oc_Quasi_CRM()} returns the operating characteristics of (Robust)-Quasi-CRM design as a list object, including: (1) selection percentage at each dose level (2) patients treated at each dose level
+\code{get_oc_RQ_CRM()} returns the operating characteristics of (Robust)-Quasi-CRM design as a list object, including: (1) selection percentage at each dose level (2) patients treated at each dose level
 }
 \references{
 Yuan, Z., R. Chappell, and H. Bailey. "The continual reassessment method for multiple toxicity grades: a Bayesian quasi-likelihood approach." Biometrics 63, no. 1 (2007): 173-179.
@@ -65,8 +69,9 @@ Chia-Wei Hsu, Haitao Pan, Rongji Mu
 ### Scenario 1 in Yuan et al. (2007) and Pan et al. (2014)
 target <- 0.47
 score <- c(0, 0.5, 1, 1.5)
-cohortsize <- 1
-ncohort <- 20
+cohortsize <- 3
+ncohort <- 10
+ntrial <- 10
 
 ptox <- matrix(nrow = 4, ncol = 6)
 ptox[1,] <- c(0.83, 0.75, 0.62, 0.51, 0.34, 0.19)
@@ -78,9 +83,9 @@ ptox[4,] <- c(0.01, 0.03, 0.09, 0.16, 0.35, 0.59)
 ### specify one skeleton (Quasi-CRM design)
 p1 <- c(0.11, 0.25, 0.40, 0.55, 0.75, 0.85)
 
-get_oc_Quasi_CRM(ptox = ptox, skeletons = p1, target = target,
-                 score = score, cohortsize = cohortsize,
-                 ncohort = ncohort)
+get_oc_RQ_CRM(ptox = ptox, skeletons = p1, target = target,
+              score = score, cohortsize = cohortsize,
+              ncohort = ncohort, ntrial = ntrial)
 
 
 
@@ -94,9 +99,9 @@ p3 <- c(0.20, 0.40, 0.60, 0.75, 0.85, 0.95)
 skeletons <- rbind(p1, p2, p3)
 
 
-get_oc_Quasi_CRM(ptox = ptox, skeletons = skeletons, target = target,
-                 score = score, cohortsize = cohortsize,
-                 ncohort = ncohort)
+get_oc_RQ_CRM(ptox = ptox, skeletons = skeletons, target = target,
+              score = score, cohortsize = cohortsize,
+              ncohort = ncohort, ntrial = ntrial)
 
 
 }

@@ -34,9 +34,9 @@ Chia-Wei Hsu, Haitao Pan, Rongji Mu
 }
 
 \examples{
-target<- 0.3
-y <- c(0, 9, 0, 0, 0, 0)
-n <- c(3, 22, 0, 0, 0, 0)
+target <- 0.3
+y <- c(0, 4, 0, 0, 0, 0)
+n <- c(3, 15, 0, 0, 0, 0)
 select_Ivanova_binary(target = target, y = y, n = n)
 
 }

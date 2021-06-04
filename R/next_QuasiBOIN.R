@@ -1,4 +1,4 @@
-next_mtd_QuasiBOIN <- function(target, n, y, d, p.saf = 0.6 * target, p.tox = 1.4 * target,
+next_QuasiBOIN <- function(target, n, y, d, p.saf = 0.6 * target, p.tox = 1.4 * target,
                                cutoff.eli = 0.95, extrasafe = FALSE, n.earlystop = 100){
   temp = get_boundary_QuasiBOIN(target = target, ncohort = sum(n), cohortsize = 1, n.earlystop = n.earlystop,
                                 p.saf = p.saf, p.tox = p.tox, cutoff.eli = cutoff.eli, extrasafe = extrasafe, print = FALSE)

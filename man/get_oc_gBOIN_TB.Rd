@@ -8,8 +8,9 @@ Generate operating characteristics for finding the maximum tolerated dose (MTD) 
 Obtain the operating characteristics of the generalized Bayesian optimal interval (gBOIN) design (Mu et al. 2017) for maximum tolerated dose (MTD) (defined by the toxicity burden (BT) score proposed by Bekele et al. (2004))-based dosing-finding trials using. The algorithm of this function is exactly same to the get_oc_gBOIN_Continuous() just the input parameter is used by the TB score
 }
 \usage{
-get_oc_gBOIN_TB(target, pmat, weight, ncohort, cohortsize, ntrial, mu_1 = 0.6 * target,
-               mu_2 = 1.4 * target, startdose = 1, seed = 100)
+get_oc_gBOIN_TB(target, pmat, weight, ncohort, cohortsize,
+                n.earlystop = 100, ntrial, mu_1 = 0.6 * target,
+                mu_2 = 1.4 * target, startdose = 1, seed = 100)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,6 +29,9 @@ the number of cohort
   }
   \item{cohortsize}{
 the cohort size
+  }
+  \item{n.earlystop}{
+the early stopping parameter. The default value is n.earlystop = 100
   }
   \item{ntrial}{
 the number of simulated trial
@@ -60,8 +64,8 @@ Chia-Wei Hsu, Haitao Pan, Rongji Mu
 }
 \examples{
 target <- 3.344
-ncohort <- 9
-cohortsize <- 4
+ncohort <- 10
+cohortsize <- 3
 ntrial <- 1000
 rate <- 1.1
 weight <- rate * rbind(c(0,1,1.5,5,6), c(0,2.5,6,rep(0,2)), c(0,2,3,6,0),
@@ -117,7 +121,8 @@ pmat[[10]] <- rbind(c(0,0,1,0,0),
                     c(1/3,0,0,2/3,0),
                     c(0,0,1,0,0),
                     c(0,0,1,0,0))
-get_oc_gBOIN_TB(target = target, pmat = pmat, weight = weight, ncohort = ncohort,
-               cohortsize = cohortsize, ntrial = ntrial)
+get_oc_gBOIN_TB(target = target, pmat = pmat, weight = weight,
+                ncohort = ncohort, cohortsize = cohortsize,
+                ntrial = ntrial)
 }
 

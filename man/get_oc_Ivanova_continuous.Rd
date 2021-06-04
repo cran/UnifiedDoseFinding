@@ -8,7 +8,8 @@ Generate operating characteristics for finding the maximum tolerated dose (MTD) 
 Obtain the operating characteristics of the dose-finding design of continuous endpoint by Ivanova et al (2009)
 }
 \usage{
-get_oc_Ivanova_continuous(target, eps = 1, ptox, ncohort, cohortsize,
+get_oc_Ivanova_continuous(target, eps = 1, ptox, ncohort,
+                          cohortsize, n.earlystop = 100,
                           ntrial, startdose = 1, seed = 100)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -27,6 +28,9 @@ the number of cohorts
 }
   \item{cohortsize}{
 the cohort size
+}
+  \item{n.earlystop}{
+the early stopping parameter. The default value is n.earlystop = 100
 }
   \item{ntrial}{
 the number of simulated trials

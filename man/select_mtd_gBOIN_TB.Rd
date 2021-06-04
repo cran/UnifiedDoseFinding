@@ -37,7 +37,7 @@ Chia-Wei Hsu, Haitao Pan, Rongji Mu
 }
 \examples{
 target <- 3.344
-n <- c(4, 32, 0, 0, 0, 0, 0, 0, 0, 0)
-y <- c(6.6, 102.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+n <- c(3, 9, 6, 0, 0, 0, 0, 0, 0, 0)
+y <- c(5.5, 26.95, 25.3, 0, 0, 0, 0, 0, 0, 0)
 select_mtd_gBOIN_TB(target = target, npts = n, ntox = y)
 }

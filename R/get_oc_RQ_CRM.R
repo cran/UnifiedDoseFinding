@@ -1,7 +1,10 @@
-get_oc_Quasi_CRM <- function (ptox, skeletons, target, score, cohortsize, ncohort, start.dose=1, mselection=1,
+get_oc_RQ_CRM <- function (ptox, skeletons, target, score, cohortsize, ncohort, n.earlystop = 100, start.dose=1, mselection=1,
                               cutoff.eli	= 0.90, ntrial = 10, seed = 100)
 {
-  
+  if (n.earlystop <= 6) {
+    cat("Warning: the value of n.earlystop is too low to ensure good operating characteristics. Recommend n.earlystop = 9 to 18 \n")
+    return()
+  }
   # if a single skeleton is inputed as a vector, convert it to a matrix
   if(is.vector(skeletons)) skeletons=t(as.matrix(skeletons));
 
@@ -30,7 +33,7 @@ get_oc_Quasi_CRM <- function (ptox, skeletons, target, score, cohortsize, ncohor
     ### define toxicity grade score system
     ngrade = length(score);
     s.max = max(score);
-    target = target/s.max;  # standardize target ET score
+    target1 = target/s.max;  # standardize target ET score
     ndose = ncol(skeletons);
     y=rep(0, ndose);  #number of toxicity at each dose level
     n=rep(0, ndose);  #number of treated patients at each dose level
@@ -50,7 +53,8 @@ get_oc_Quasi_CRM <- function (ptox, skeletons, target, score, cohortsize, ncohor
       }
 
       n[dose.curr] = n[dose.curr] + cohortsize;
-
+      if (n[dose.curr] >= n.earlystop)
+        break
       marginal = rep(0, nskel);
       for(k in 1:nskel)
       {
@@ -66,7 +70,7 @@ get_oc_Quasi_CRM <- function (ptox, skeletons, target, score, cohortsize, ncohor
         else msel = 1;
 
         # estimation based on the selected model
-        p.overtox = integrate(posterior,lower=-Inf,upper=log(log(target)/log(skeletons[msel,1])), skeletons[msel,], y, n)$value/marginal[msel];
+        p.overtox = integrate(posterior,lower=-Inf,upper=log(log(target1)/log(skeletons[msel,1])), skeletons[msel,], y, n)$value/marginal[msel];
         if(p.overtox>cutoff.eli) { stop=1; break;}
 
         # calculate posterior mean of toxicity probability at each dose leavel
@@ -77,7 +81,7 @@ get_oc_Quasi_CRM <- function (ptox, skeletons, target, score, cohortsize, ncohor
         pj.overtox = rep(0, nskel);
         for(k in 1:nskel)
         {
-          pj.overtox[k] = integrate(posterior,lower=-Inf,upper=log(log(target)/log(skeletons[k,1])), skeletons[k,], y, n)$value/marginal[k];
+          pj.overtox[k] = integrate(posterior,lower=-Inf,upper=log(log(target1)/log(skeletons[k,1])), skeletons[k,], y, n)$value/marginal[k];
         }
         p.overtox = sum(postprob*pj.overtox);
         if(p.overtox>cutoff.eli) { stop=1; break;}
@@ -92,18 +96,18 @@ get_oc_Quasi_CRM <- function (ptox, skeletons, target, score, cohortsize, ncohor
         }
       }
 
-      diff = abs(ptox.hat-target);
+      diff = abs(ptox.hat-target1);
       dose.best = min(which(diff==min(diff)));
       #       dose.curr = dose.best;  # allowing dose skipping
       if(dose.best>dose.curr && dose.curr != ndose) dose.curr = dose.curr+1;
       if(dose.best<dose.curr && dose.curr != 1) dose.curr = dose.curr-1;
-      
+
     }
 
     if(stop==0) { dose.select[dose.best] = dose.select[dose.best]+1; }
     N[ii, ] <- n
     S[ii, ] <- dose.select
-    
+
   }
   selpercent <- apply(S, 2, mean) * 100
   nptsdose <- apply(N, 2, mean)

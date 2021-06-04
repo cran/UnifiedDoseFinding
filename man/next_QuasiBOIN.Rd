@@ -1,5 +1,5 @@
-\name{next_mtd_QuasiBOIN}
-\alias{next_mtd_QuasiBOIN}
+\name{next_QuasiBOIN}
+\alias{next_QuasiBOIN}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Determine the dose for the next cohort of new patients based on equivalent score (ET)-defined target using gBOIN design
@@ -8,8 +8,8 @@ Determine the dose for the next cohort of new patients based on equivalent score
 Determine the dose for the next cohort of new patients for single-agent trials that aim to find a MTD defined by the Equivalent Score (ET) in Quasi-CRM design (Yuan et al. 2007) and Robust-Quasi-CRM design (Pan et al. 2014) using the gBOIN design (Mu et al. 2017)
 }
 \usage{
-next_mtd_QuasiBOIN(target, n, y, d, p.saf = 0.6 * target, p.tox = 1.4 * target,
-                   cutoff.eli = 0.95, extrasafe = FALSE, n.earlystop = 100)
+next_QuasiBOIN(target, n, y, d, p.saf = 0.6 * target, p.tox = 1.4 * target,
+               cutoff.eli = 0.95, extrasafe = FALSE, n.earlystop = 100)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -42,7 +42,7 @@ the early stopping parameter. The default value is n.earlystop = 100
   }
 }
 \value{
-\code{next_mtd_QuasiBOIN()} returns recommended dose level for the next cohort as a numeric value under quasi-binary measure
+\code{next_QuasiBOIN()} returns recommended dose level for the next cohort as a numeric value under quasi-binary measure
 }
 \references{
 Yuan, Z., R. Chappell, and H. Bailey. "The continual reassessment method for multiple toxicity grades: a Bayesian quasi-likelihood approach." Biometrics 63, no. 1 (2007): 173-179.
@@ -60,9 +60,9 @@ Chia-Wei Hsu, Haitao Pan, Rongji Mu
 
 \examples{
 target <- 0.47 / 1.5
-n <- c(3, 3, 6, 9, 9, 0)
-y <- c(0.000000, 0.000000, 1.333333, 2.333333, 3.666667, 0.0000000)
-d <- 4
-next_mtd_QuasiBOIN(target = target, n = n, y = y, d = d)
+n <- c(3, 3, 6, 3, 3, 0)
+y <- c(0, 0, 1.333333, 0, 1, 0)
+d <- 5
+next_QuasiBOIN(target = target, n = n, y = y, d = d)
 
 }

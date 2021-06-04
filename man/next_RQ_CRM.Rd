@@ -1,5 +1,5 @@
-\name{next_mtd_Quasi_CRM}
-\alias{next_mtd_Quasi_CRM}
+\name{next_RQ_CRM}
+\alias{next_RQ_CRM}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Determine the dose for the next cohort of new patients using Quasi-CRM design
@@ -8,8 +8,8 @@ Determine the dose for the next cohort of new patients using Quasi-CRM design
 Determine the dose for the next cohort of new patients for single-agent trials that aim to find a MTD defined by the Equivalent Score (ET) using Quasi-CRM design (Yuan et al. 2007) and Robust-Quasi-CRM design (Pan et al. 2014)
 }
 \usage{
-next_mtd_Quasi_CRM(target, n, y, dose.curr, score, skeleton,
-                          cutoff.eli = 0.90, mselection = 1)
+next_RQ_CRM(target, n, y, dose.curr, score, skeleton,
+            cutoff.eli = 0.90, mselection = 1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -40,7 +40,7 @@ mselection = 1 (or 0) indicate to use Bayesian model selection (or mode averagin
 }
 
 \value{
-\code{next_mtd_Quasi_CRM()} returns recommended dose level for the next cohort as a numeric value
+\code{next_RQ_CRM()} returns recommended dose level for the next cohort as a numeric value
 }
 \references{
 Yuan, Z., R. Chappell, and H. Bailey. "The continual reassessment method for multiple toxicity grades: a Bayesian quasi-likelihood approach." Biometrics 63, no. 1 (2007): 173-179.
@@ -59,13 +59,24 @@ p1 <- c(0.11, 0.25, 0.40, 0.55, 0.75, 0.85)
 p2 <- c(0.05, 0.10, 0.15, 0.25, 0.40, 0.65)
 p3 <- c(0.20, 0.40, 0.60, 0.75, 0.85, 0.95)
 skeletons <- rbind(p1, p2, p3)
-n <- c(1, 1, 1, 1, 15, 1)
-y <- c(0.000000, 0.000000, 0.000000, 0.000000, 4.666667, 1.000000)
-next_mtd_Quasi_CRM (target = target, n = n, y = y, dose.curr = 5,
-                          score = score, skeleton = skeletons)
+n <- c(3, 3, 3, 9, 3, 0)
+y <- c(0, 0, 1, 1.333333, 3, 0)
+
+## Example to get the ET score 1 on dose 3
+## Assume three patients their corresponding score on the dose 3 is
+## 0.5, 0.5 and 0.5. Then we calculate ET score as this:
+## (0.5 + 0.5 + 0.5) / 1.5 = 1
+
+## Example to get the ET score 1.333333 on dose 4
+## Assume nine patients their corresponding score on the dose 4 is
+## 0, 0, 0, 0, 0, 0, 0.5, 0.5 and 1. Then we calculate ET score as this:
+## (0 + 0 + 0 + 0 + 0 + 0 + 0.5 + 0.5 + 1) / 1.5 = 1.333333
+
+next_RQ_CRM(target = target, n = n, y = y, dose.curr = 5,
+            score = score, skeleton = skeletons)
 
 ### Implement Quasi-CRM design (Yuan et al. 2007) with pre-specifying/using 1 skeletons
-next_mtd_Quasi_CRM (target = target, n = n, y = y, dose.curr = 5,
-                          score = score, skeleton = p1)
+next_RQ_CRM(target = target, n = n, y = y, dose.curr = 5,
+            score = score, skeleton = p1)
 
 }

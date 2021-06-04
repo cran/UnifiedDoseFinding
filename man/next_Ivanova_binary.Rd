@@ -44,8 +44,8 @@ Chia-Wei Hsu, Haitao Pan, Rongji Mu
 \examples{
 target <- 0.3
 eps <- 1
-y <- c(0, 9, 0, 0, 0, 0)
-n <- c(3, 22, 0, 0, 0, 0)
+y <- c(0, 4, 0, 0, 0, 0)
+n <- c(3, 15, 0, 0, 0, 0)
 d <- 2
 next_Ivanova_binary(target = target, eps = eps, y = y, n = n, d = d)
 

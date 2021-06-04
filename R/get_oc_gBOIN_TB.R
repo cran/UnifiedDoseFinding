@@ -1,4 +1,8 @@
-get_oc_gBOIN_TB<-function(target,pmat,weight,ncohort,cohortsize,ntrial,mu_1=0.6*target,mu_2=1.4*target,startdose = 1, seed = 100){
+get_oc_gBOIN_TB<-function(target,pmat,weight,ncohort,cohortsize,n.earlystop = 100, ntrial,mu_1=0.6*target,mu_2=1.4*target,startdose = 1, seed = 100){
+  if (n.earlystop <= 6) {
+    cat("Warning: the value of n.earlystop is too low to ensure good operating characteristics. Recommend n.earlystop = 9 to 18 \n")
+    return()
+  }
   set.seed(seed)
   ndose = length(pmat)
   npts = ncohort * cohortsize
@@ -17,6 +21,8 @@ get_oc_gBOIN_TB<-function(target,pmat,weight,ncohort,cohortsize,ntrial,mu_1=0.6*
       }
       y[d] = y[d] + sum(y0*weight)
       n[d] = n[d] + cohortsize
+      if (n[d] >= n.earlystop)
+        break
       if (y[d]/n[d] <=(target+mu_1)/2&& d != ndose) {
           d = d + 1
       }

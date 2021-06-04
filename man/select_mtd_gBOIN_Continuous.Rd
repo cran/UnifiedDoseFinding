@@ -33,8 +33,8 @@ Rongji Mu, Ying Yuan, Jin Xu, Sumithra J. Mandrekar, Jun Yin: gBOIN: a unified m
 Chia-Wei Hsu, Haitao Pan, Rongji Mu
 }
 \examples{
-target <- 0.1
-n <- c(14, 1, 0, 0, 0, 0)
-y <- c(1.4268322, 0.1631531, 0, 0, 0, 0)
+target <- 1.47
+n <- c(3, 3, 3, 9, 0, 0)
+y <- c(0.1951265, 1.5434317, 2.1967343, 13.9266838, 0, 0)
 select_mtd_gBOIN_Continuous(target = target, npts = n, ntox = y)
 }

@@ -52,6 +52,6 @@ Chia-Wei Hsu, Haitao Pan, Rongji Mu
 \examples{
 target <- 0.47 / 1.5
 n <- c(3, 3, 6, 9, 9, 0)
-y <- c(0.000000, 0.000000, 1.333333, 2.333333, 3.666667, 0.0000000)
+y <- c(0, 0, 1.333333, 2.333333, 3.666667, 0)
 select_mtd_QuasiBOIN(target = target, npts = n, ntox = y)
 }

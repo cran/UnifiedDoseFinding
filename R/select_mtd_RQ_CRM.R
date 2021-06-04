@@ -1,4 +1,4 @@
-select_mtd_Quasi_CRM <- function(target, n, y, score, skeleton, mselection = 1){
+select_mtd_RQ_CRM <- function(target, n, y, score, skeleton, mselection = 1){
   # if a single skeleton is inputed as a vector, convert it to a matrix
   if(is.vector(skeletons)) skeletons=t(as.matrix(skeletons));
 
@@ -25,7 +25,7 @@ select_mtd_Quasi_CRM <- function(target, n, y, score, skeleton, mselection = 1){
 
 
   s.max = max(score);
-  target = target/s.max;  # standardize target ET score
+  target1 = target/s.max;  # standardize target ET score
   ndose = ncol(skeletons);
   ptox.hat = numeric(ndose); # estimate of toxicity prob
   dose.select=rep(0, ndose); # a vector of indicators for dose selection
@@ -60,7 +60,7 @@ select_mtd_Quasi_CRM <- function(target, n, y, score, skeleton, mselection = 1){
     }
   }
 
-  diff = abs(ptox.hat-target);
+  diff = abs(ptox.hat-target1);
   dose.best = min(which(diff==min(diff)));
 
   dose.select[dose.best] = dose.select[dose.best]+1;
