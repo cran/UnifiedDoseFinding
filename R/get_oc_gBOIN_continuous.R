@@ -1,4 +1,4 @@
-get_oc_gBOIN_Continuous <-function(target,c_true,ncohort,cohortsize, n.earlystop = 100, ntrial,mu_1=0.6*target,mu_2=1.4*target,startdose = 1, seed = 100){
+get_oc_gBOIN_continuous <-function(target,c_true,ncohort,cohortsize, n.earlystop = 100, ntrial,mu_1=0.6*target,mu_2=1.4*target,startdose = 1, seed = 100){
   if (n.earlystop <= 6) {
     cat("Warning: the value of n.earlystop is too low to ensure good operating characteristics. Recommend n.earlystop = 9 to 18 \n")
     return()
@@ -30,7 +30,7 @@ get_oc_gBOIN_Continuous <-function(target,c_true,ncohort,cohortsize, n.earlystop
     }
     Y[trial, ] = y
     N[trial, ] = n
-    dselect[trial] = select_mtd_gBOIN_Continuous(target, n, y)
+    dselect[trial] = select_mtd_gBOIN_continuous(target, n, y)
   }
   selpercent = rep(0, ndose)
   nptsdose = apply(N, 2, mean)

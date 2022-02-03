@@ -1,5 +1,5 @@
-\name{select_Ivanova_continuous}
-\alias{select_Ivanova_continuous}
+\name{select_mtd_Ivanova_continuous}
+\alias{select_mtd_Ivanova_continuous}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Select the maximum tolerated dose (MTD) for single agent trials of continuous endpoint using design by Ivanova et al (2009)
@@ -8,7 +8,7 @@ Select the maximum tolerated dose (MTD) for single agent trials of continuous en
 Select the maximum tolerated dose (MTD) when the trial is completed for continuous endpoint using design by Ivanova et al (2009)
 }
 \usage{
-select_Ivanova_continuous(target, c_resp, n)
+select_mtd_Ivanova_continuous(target, c_resp, n)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -24,7 +24,7 @@ the number of patients enrolled at each dose level
 }
 
 \value{
-\code{select_Ivanova_continuous()} returns a list object including: (1) dose selected (2) patients treated at each dose level
+\code{select_mtd_Ivanova_continuous()} returns a list object including: (1) dose selected (2) patients treated at each dose level
 }
 \references{
 Ivanova, Anastasia, and Se Hee Kim. "Dose finding for continuous and ordinal outcomes with a monotone objective function: a unified approach." Biometrics 65, no. 1 (2009): 307-315.
@@ -44,6 +44,6 @@ c_resp <- list(c(0, 0.05475884, 0.12446843, 0.10131912),
                0,
                0)
 n <- c(3, 3, 3, 9, 0, 0)
-select_Ivanova_continuous(target = target, c_resp = c_resp, n = n)
+select_mtd_Ivanova_continuous(target = target, c_resp = c_resp, n = n)
 }
 

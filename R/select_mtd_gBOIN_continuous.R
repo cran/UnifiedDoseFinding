@@ -1,4 +1,4 @@
-select_mtd_gBOIN_Continuous <- function (target, npts, ntox)
+select_mtd_gBOIN_continuous <- function (target, npts, ntox)
 {
   pava <- function(x, wt = rep(1, length(x))) {
     n <- length(x)

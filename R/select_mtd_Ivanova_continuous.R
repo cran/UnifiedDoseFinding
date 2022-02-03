@@ -1,4 +1,4 @@
-select_Ivanova_continuous <- function(target, c_resp, n){
+select_mtd_Ivanova_continuous <- function(target, c_resp, n){
   y <- sapply(c_resp, sum)
   le <- length(n)
   ## estimating the maximum tolerated dose

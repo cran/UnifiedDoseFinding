@@ -1,4 +1,4 @@
-select_Ivanova_binary <- function(target, y, n){
+select_mtd_Ivanova_binary <- function(target, y, n){
   le <- length(y)
   trind=ifelse(n>0,1,0)*(1:le)
   if (n[1]==0) {trind=trind[-1]; dob=1} else dob=0
