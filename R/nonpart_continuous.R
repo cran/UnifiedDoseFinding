@@ -46,7 +46,7 @@ nonpart_continuous=function(ga,truetox,ncohort,cohortsize,startdose=1, eps, n.ea
     if (trials[dosenum] >= n.earlystop1)
       break
     #resp=rbinom(1,groupsize,truetox[dosenum])
-    resp = rnorm(cohortsize,c_true[dosenum],c_true[dosenum])#c_true[dosenum])#0.1*dosenum)
+    resp = rnorm(cohortsize,c_true[dosenum],abs(c_true[dosenum]))#c_true[dosenum])#0.1*dosenum)
     c_resp[[dosenum]] = c(c_resp[[dosenum]],resp)
     y[dosenum]=y[dosenum]+sum(resp)
     qhat=y[dosenum]/trials[dosenum]

@@ -1,4 +1,4 @@
-5a4ab510457b91e8c3e5200a6dc18b90 *DESCRIPTION
+9c48ad29b5c624ab36b1761abfb9f15c *DESCRIPTION
 8010ff0044a9b1b3ca59cb06a0f71439 *NAMESPACE
 9aedaf0b9837d82c3290120e939c1f94 *R/get_boundary_BOIN.R
 11aebd3e2c85db404184f58e9ea0c1b9 *R/get_boundary_QuasiBOIN.R
@@ -17,7 +17,7 @@ bebc5bac67245d2f53725b36f1f11eee *R/next_QuasiBOIN.R
 df887d68e62a379fecf83be83797ad26 *R/next_gBOIN_TB.R
 b4737707576c7693832ed7a4a462e4a2 *R/next_gBOIN_continuous.R
 af17e931c6a25fbae2b37b87799caccd *R/nonpart_binary.R
-4c5f5d086925c1ed87ef783c17ad5dda *R/nonpart_continuous.R
+ade895eeff558c53655553606ff568dd *R/nonpart_continuous.R
 00132af8e7c7784315865e02d6547a01 *R/pava_binary.R
 93d8ec899ca1dd868d3e30617b7d9705 *R/pava_continuous.R
 ee54eedbe7639ffec3f1f79bcf0b6fce *R/rmultinom1.R
